@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetalleVentaCreateDlg" widgetVar="DetalleVentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDetalleVentaTitle}">
+            <h:form id="DetalleVentaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detalleVentaController.selected != null}">
+                        
+                        <p:outputLabel value="#{bundle.CreateDetalleVentaLabel_canven}" for="canven" />
+                        <p:inputText id="canven" value="#{detalleVentaController.selected.canven}" title="#{bundle.CreateDetalleVentaTitle_canven}" />
+                        <p:outputLabel value="#{bundle.CreateDetalleVentaLabel_sbtven}" for="sbtven" />
+                        <p:inputText id="sbtven" value="#{detalleVentaController.selected.sbtven}" title="#{bundle.CreateDetalleVentaTitle_sbtven}" />
+                        <p:outputLabel value="Producto" for="codpro" />
+                        <p:selectOneMenu id="codpro" value="#{detalleVentaController.selected.codpro}" required="true" requiredMessage="#{bundle.EditDetalleVentaRequiredMessage_codpro}">
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="codproItem"
+                                           itemLabel="#{codproItem.despro}"
+                                           itemValue="#{codproItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Venta" for="codven" />
+                        <p:selectOneMenu id="codven" value="#{detalleVentaController.selected.codven}" required="true" requiredMessage="#{bundle.EditDetalleVentaRequiredMessage_codven}">
+                            <f:selectItems value="#{ventaController.itemsAvailableSelectOne}"
+                                           var="codvenItem"
+                                           itemLabel="#{codvenItem.codven}"
+                                           itemValue="#{codvenItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{detalleVentaController.create}" value="#{bundle.Save}" update="display,:DetalleVentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'DetalleVentaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DetalleVentaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

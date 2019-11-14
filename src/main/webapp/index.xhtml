@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="resources/images/icons/favicon.ico"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/util.css"></link>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/main.css"></link>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="growl" life="3000"/>
+            <div class="limiter">
+                <div class="container-login100">
+                    <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                        <form class="login100-form validate-form flex-sb flex-w">
+                            <span class="login100-form-title p-b-32">
+                                Account Login
+                            </span>
+
+                            <span class="txt1 p-b-11">
+                                Username
+                            </span>
+                            <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+                                <!--<input class="input100" type="text" name="username" ></input>-->
+                                <p:inputText class="input100" required="true" value="#{login.us}"/>
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <span class="txt1 p-b-11">
+                                Password
+                            </span>
+                            <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+                                <span class="btn-show-pass">
+                                    <i class="fa fa-eye"></i>
+                                </span>
+                                <!--<input class="input100" type="password" name="pass" ></input>-->
+                                <p:inputText class="input100" required="true" type="password" value="#{login.pass}"/>
+                                <span class="focus-input100"></span> 
+                            </div>
+
+                            <div class="flex-sb-m w-full p-b-48">
+                                <div class="contact100-form-checkbox">
+                                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"></input>
+                                    <label class="label-checkbox100" for="ckb1">
+                                        Remember me
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <a href="#" class="txt3">
+                                        Forgot Password?
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="container-login100-form-btn">
+                                <!--<h:link outcome="vista/template" value="Login" class="login100-form-btn"/>-->
+                                <p:commandButton class="login100-form-btn" update="growl" value="Login" action="#{login.autentificar()}" />
+                            </div>
+
+                        </form>
+                    </div>
+                </div>  
+            </div>
+            <div id="dropDownSelect1"></div>
+        </h:form>
+    </h:body>
+
+
+
+
+
+
+</html>
+

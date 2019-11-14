@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VentaCreateDlg" widgetVar="VentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVentaTitle}">
+            <h:form id="VentaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateVentaLabel_fecven}" for="fecven" />
+                        <p:inputMask id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.CreateVentaTitle_fecven}" mask="99/99/9999"/>
+                        <p:outputLabel value="#{bundle.CreateVentaLabel_totven}" for="totven" />
+                        <p:inputText id="totven" value="#{ventaController.selected.totven}" title="#{bundle.CreateVentaTitle_totven}" maxlength="5"/>
+                        <p:outputLabel value="#{bundle.CreateVentaLabel_codper}" for="codper" />
+                        <p:selectOneMenu id="codper" value="#{ventaController.selected.codper}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_codper}">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codperItem"
+                                           itemLabel="#{codperItem.apeper}"
+                                           itemValue="#{codperItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:keyFilter for="totven" mask="num" />
+                    <p:commandButton actionListener="#{ventaController.create}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VentaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

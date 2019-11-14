@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePersonaTitle}">
+            <h:form id="PersonaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+
+                        <p:outputLabel value="Nombres" for="nomper" />
+                        <p:inputText id="nomper" value="#{personaController.selected.nomper}" title="#{bundle.CreatePersonaTitle_nomper}" />
+                        <p:outputLabel value="Apellidos" for="apeper" />
+                        <p:inputText id="apeper" value="#{personaController.selected.apeper}" title="#{bundle.CreatePersonaTitle_apeper}" />
+                        <p:outputLabel value="DNI" for="dniper" />
+                        <p:inputText id="dniper" value="#{personaController.selected.dniper}" title="#{bundle.CreatePersonaTitle_dniper}" maxlength="8"/>
+                        <p:outputLabel value="Fecha Nacimiento" for="fecnacper" />
+                        <p:inputMask id="fecnacper" value="#{personaController.selected.fecnacper}" title="#{bundle.CreatePersonaTitle_fecnacper}" mask="99/99/9999"/>
+                        <p:outputLabel value="Dirección" for="dirper" />
+                        <p:inputText id="dirper" value="#{personaController.selected.dirper}" title="#{bundle.CreatePersonaTitle_dirper}" />
+                        <p:outputLabel value="Teléfono" for="telper" />
+                        <p:inputText id="telper" value="#{personaController.selected.telper}" title="#{bundle.CreatePersonaTitle_telper}" maxlength="9"/>
+                    </p:panelGrid>
+                    <p:keyFilter for="nomper" regEx="/[a-z_ñ]/i" />
+                    <p:keyFilter for="apeper" regEx="/[a-z_ñ]/i" />
+                    <p:keyFilter for="dniper" mask="num" />
+                    <p:keyFilter for="telper" mask="num" />
+                    <p:commandButton actionListener="#{personaController.create}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaCreateDialog');" onclick="PersonaCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

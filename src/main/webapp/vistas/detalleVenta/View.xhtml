@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetalleVentaViewDlg" widgetVar="DetalleVentaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDetalleVentaTitle}">
+            <h:form id="DetalleVentaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detalleVentaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDetalleVentaLabel_coddetven}"/>
+                        <h:outputText value="#{detalleVentaController.selected.coddetven}" title="#{bundle.ViewDetalleVentaTitle_coddetven}"/>
+                        <h:outputText value="#{bundle.ViewDetalleVentaLabel_canven}"/>
+                        <h:outputText value="#{detalleVentaController.selected.canven}" title="#{bundle.ViewDetalleVentaTitle_canven}"/>
+                        <h:outputText value="#{bundle.ViewDetalleVentaLabel_sbtven}"/>
+                        <h:outputText value="#{detalleVentaController.selected.sbtven}" title="#{bundle.ViewDetalleVentaTitle_sbtven}"/>
+                        <h:outputText value="#{bundle.ViewDetalleVentaLabel_codpro}"/>
+                        <h:outputText value="#{detalleVentaController.selected.codpro}" title="#{bundle.ViewDetalleVentaTitle_codpro}"/>
+                        <h:outputText value="#{bundle.ViewDetalleVentaLabel_codven}"/>
+                        <h:outputText value="#{detalleVentaController.selected.codven}" title="#{bundle.ViewDetalleVentaTitle_codven}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DetalleVentaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
