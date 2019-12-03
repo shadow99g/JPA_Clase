@@ -23,7 +23,7 @@
                     <p:keyFilter for="despro" regEx="/[a-z_ñ]/i" />
                     <p:keyFilter for="cospro" mask="num" />
                     <p:keyFilter for="stopro" mask="num" />
-                    <p:commandButton actionListener="#{productoController.create}" value="#{bundle.Save}" update="display,:ProductoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductoCreateDialog');"/>
+                    <p:commandButton actionListener="#{productoController.create}" value="#{bundle.Save}" update="display,:ProductoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductoCreateDialog');" onclick="ProductoCreateDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ProductoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

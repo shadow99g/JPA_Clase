@@ -27,7 +27,7 @@
                         <p:inputText id="telper" value="#{personaController.selected.telper}" title="#{bundle.EditPersonaTitle_telper}" />
 
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{personaController.update}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');"/>
+                    <p:commandButton actionListener="#{personaController.update}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');" onclick="PersonaEditDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PersonaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

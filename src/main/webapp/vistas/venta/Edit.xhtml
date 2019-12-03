@@ -12,10 +12,10 @@
             <h:form id="VentaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
-                        <p:outputLabel value="ID" for="codven" />
-                        <p:inputText id="codven" value="#{ventaController.selected.codven}" title="#{bundle.EditVentaTitle_codven}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_codven}"/>
+
                         <p:outputLabel value="Fecha" for="fecven" />
-                        <p:inputText id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.EditVentaTitle_fecven}" />
+                        <p:inputMask id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.EditVentaTitle_fecven}" mask="99/99/9999"/>
+
                         <p:outputLabel value="Total de Ventas" for="totven" />
                         <p:inputText id="totven" value="#{ventaController.selected.totven}" title="#{bundle.EditVentaTitle_totven}" />
                         <p:outputLabel value="Persona" for="codper" />
@@ -27,7 +27,7 @@
                                            itemValue="#{codperItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ventaController.update}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VentaEditDialog');"/>
+                    <p:commandButton actionListener="#{ventaController.update}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VentaEditDialog');" onclick="VentaEditDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VentaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

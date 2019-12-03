@@ -26,7 +26,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:keyFilter for="totven" mask="num" />
-                    <p:commandButton actionListener="#{ventaController.create}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');"/>
+                    <p:commandButton actionListener="#{ventaController.create}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');" onclick="VentaEditDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VentaCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
