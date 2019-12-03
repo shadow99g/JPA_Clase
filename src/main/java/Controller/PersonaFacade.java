@@ -32,7 +32,7 @@ public class PersonaFacade extends AbstractFacade<Persona> {
     }
 
     public Persona loginPer(String usu) {
-        Query q = em.createNamedQuery("Persona.findByNomper", Persona.class).setParameter("nomper", usu);
+        Query q = em.createNamedQuery("Persona.findByDniper", Persona.class).setParameter("dniper", usu);
         List<Persona> list = q.getResultList();
 
         if (!list.isEmpty()) {

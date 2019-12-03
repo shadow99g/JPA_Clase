@@ -12,25 +12,26 @@
             <h:form id="DetalleVentaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{detalleVentaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditDetalleVentaLabel_coddetven}" for="coddetven" />
-                        <p:inputText id="coddetven" value="#{detalleVentaController.selected.coddetven}" title="#{bundle.EditDetalleVentaTitle_coddetven}" required="true" requiredMessage="#{bundle.EditDetalleVentaRequiredMessage_coddetven}"/>
-                        <p:outputLabel value="#{bundle.EditDetalleVentaLabel_canven}" for="canven" />
+                        
+                        <p:outputLabel value="Cantidad" for="canven" />
                         <p:inputText id="canven" value="#{detalleVentaController.selected.canven}" title="#{bundle.EditDetalleVentaTitle_canven}" />
-                        <p:outputLabel value="#{bundle.EditDetalleVentaLabel_sbtven}" for="sbtven" />
+                        <p:outputLabel value="Stock" for="sbtven" />
                         <p:inputText id="sbtven" value="#{detalleVentaController.selected.sbtven}" title="#{bundle.EditDetalleVentaTitle_sbtven}" />
-                        <p:outputLabel value="#{bundle.EditDetalleVentaLabel_codpro}" for="codpro" />
+                        <p:outputLabel value="Producto" for="codpro" />
                         <p:selectOneMenu id="codpro" value="#{detalleVentaController.selected.codpro}" required="true" requiredMessage="#{bundle.EditDetalleVentaRequiredMessage_codpro}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
                                            var="codproItem"
-                                           itemValue="#{codproItem}"/>
+                                           itemValue="#{codproItem}"
+                                           itemLabel="#{codproItem.despro}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditDetalleVentaLabel_codven}" for="codven" />
+                        <p:outputLabel value="Codigo de Venta" for="codven" />
                         <p:selectOneMenu id="codven" value="#{detalleVentaController.selected.codven}" required="true" requiredMessage="#{bundle.EditDetalleVentaRequiredMessage_codven}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{ventaController.itemsAvailableSelectOne}"
                                            var="codvenItem"
-                                           itemValue="#{codvenItem}"/>
+                                           itemValue="#{codvenItem}"
+                                           itemLabel="#{codvenItem.codven}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{detalleVentaController.update}" value="#{bundle.Save}" update="display,:DetalleVentaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DetalleVentaEditDialog');"/>

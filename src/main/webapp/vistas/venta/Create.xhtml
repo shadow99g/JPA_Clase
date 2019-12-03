@@ -13,11 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
 
-                        <p:outputLabel value="#{bundle.CreateVentaLabel_fecven}" for="fecven" />
+                        <p:outputLabel value="Fecha de Venta" for="fecven" />
                         <p:inputMask id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.CreateVentaTitle_fecven}" mask="99/99/9999"/>
-                        <p:outputLabel value="#{bundle.CreateVentaLabel_totven}" for="totven" />
+                        <p:outputLabel value="Total de Ventas" for="totven" />
                         <p:inputText id="totven" value="#{ventaController.selected.totven}" title="#{bundle.CreateVentaTitle_totven}" maxlength="5"/>
-                        <p:outputLabel value="#{bundle.CreateVentaLabel_codper}" for="codper" />
+                        <p:outputLabel value="Persona" for="codper" />
                         <p:selectOneMenu id="codper" value="#{ventaController.selected.codper}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_codper}">
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="codperItem"

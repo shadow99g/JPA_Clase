@@ -38,10 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Persona.findByFecnacper", query = "SELECT p FROM Persona p WHERE p.fecnacper = :fecnacper")
     , @NamedQuery(name = "Persona.findByDirper", query = "SELECT p FROM Persona p WHERE p.dirper = :dirper")
     , @NamedQuery(name = "Persona.findByTelper", query = "SELECT p FROM Persona p WHERE p.telper = :telper")
-    , @NamedQuery(name = "Persona.findByEstper", query = "SELECT p FROM Persona p WHERE p.estper = :estper")})
+    , @NamedQuery(name = "Persona.findByEstper", query = "SELECT p FROM Persona p WHERE p.estper = :estper")
+})
 public class Persona implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
@@ -67,6 +67,13 @@ public class Persona implements Serializable {
     @Column(length = 9)
     private String telper;
     private Character estper;
+    @Size(max = 20)
+    @Column(length = 20)
+    private String passwd;
+
+    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codper")
     private List<Venta> ventaList;
 
@@ -174,5 +181,13 @@ public class Persona implements Serializable {
     public String toString() {
         return "com.mycompany.clase.Persona[ codper=" + codper + " ]";
     }
-    
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
 }

@@ -37,8 +37,7 @@ public class login implements Serializable {
 
         usu = usuFacade.loginPer(us);
         if (usu != null) {
-            if (usu.getDniper().equals(pass)) {
-                limpiar();
+            if (usu.getPasswd().equals(pass)) {
                 return "ingresar";
 
             }
@@ -49,30 +48,8 @@ public class login implements Serializable {
         return null;
 
     }
-//
-//    public void lts() throws Exception {
-//
-//        try {
-//            onemenu = usuFacade.selectone();
-//        } catch (Exception e) {
-//            throw e ;
-//        }
-//
-//    }
 
-    public void limpiar() {
-
-        us = null;
-        pass = null;
-
-    }
-
-//    public List<Persona> getOnemenu() {
-//        if (onemenu == null) {
-//            onemenu = usuFacade.selectone();
-//        }
-//        return onemenu;
-//    }
+   
 
     public Persona getUsu() {
         return usu;
