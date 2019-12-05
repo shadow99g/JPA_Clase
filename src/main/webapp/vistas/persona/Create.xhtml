@@ -7,7 +7,7 @@
 
     <ui:composition>
 
-        <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePersonaTitle}">
+        <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="true" appendTo="@(body)" header="#{bundle.CreatePersonaTitle}" width="550" height="300">
             <h:form id="PersonaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
@@ -19,14 +19,15 @@
                         <p:outputLabel value="DNI" for="dniper" />
                         <p:inputText id="dniper" value="#{personaController.selected.dniper}" title="#{bundle.CreatePersonaTitle_dniper}" maxlength="8"/>
                         <p:outputLabel value="Fecha Nacimiento" for="fecnacper" />
-                        <p:inputMask id="fecnacper" value="#{personaController.selected.fecnacper}" title="#{bundle.CreatePersonaTitle_fecnacper}" mask="99/99/9999"/>
+                        <p:datePicker id="fecnacper" value="#{personaController.selected.fecnacper}" title="#{bundle.CreatePersonaTitle_fecnacper}" />
+                        
                         <p:outputLabel value="Dirección" for="dirper" />
                         <p:inputText id="dirper" value="#{personaController.selected.dirper}" title="#{bundle.CreatePersonaTitle_dirper}" />
                         <p:outputLabel value="Teléfono" for="telper" />
                         <p:inputText id="telper" value="#{personaController.selected.telper}" title="#{bundle.CreatePersonaTitle_telper}" maxlength="9"/>
                     </p:panelGrid>
-                    <p:keyFilter for="nomper" regEx="/[a-z_ñ]/i" />
-                    <p:keyFilter for="apeper" regEx="/[a-z_ñ]/i" />
+                    <p:keyFilter for="nomper" regEx="/[a-z_ñ_ ]/i" />
+                    <p:keyFilter for="apeper" regEx="/[a-z_ñ_ ]/i" />
                     <p:keyFilter for="dniper" mask="num" />
                     <p:keyFilter for="telper" mask="num" />
                     <p:commandButton actionListener="#{personaController.create}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaCreateDialog');" onclick="PersonaCreateDialog.hide()"/>

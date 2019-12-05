@@ -36,13 +36,15 @@
                             <f:facet name="header">
                                 <h:outputText value="Fecha"/>
                             </f:facet>
-                            <h:outputText value="#{item.fecven}"/>
+                            <h:outputText value="#{item.fecven}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Total de Ventas"/>
                             </f:facet>
-                            <h:outputText value="#{item.totven}"/>
+                            <h:outputText value="#{item.nroventa}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -52,7 +54,7 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ventaController.prepareCreate}" update=":VentaCreateForm" oncomplete="PF('VentaCreateDialog').show()"/>
-                            
+
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VentaEditForm" oncomplete="PF('VentaEditDialog').show()" disabled="#{empty ventaController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{ventaController.destroy}" update=":growl,datalist" disabled="#{empty ventaController.selected}"/>
                         </f:facet>
@@ -62,7 +64,7 @@
 
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
-            
+
         </ui:define>
     </ui:composition>
 

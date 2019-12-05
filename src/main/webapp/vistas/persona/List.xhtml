@@ -52,7 +52,9 @@
                         <p:rowExpansion>
                             <p:panelGrid columns="2">
                                 <h:outputText value="Fecha Nacimiento"/>
-                                <h:outputText value="#{item.fecnacper}" title="#{bundle.ViewPersonaTitle_fecnacper}"/>
+                                <h:outputText value="#{item.fecnacper}" title="#{bundle.ViewPersonaTitle_fecnacper}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
                                 <h:outputText value="Dirección"/>
                                 <h:outputText value="#{item.dirper}" title="#{bundle.ViewPersonaTitle_dirper}"/>
                                 <h:outputText value="Teléfono"/>

@@ -6,9 +6,11 @@
 package Controller;
 
 import Entidades.Venta;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,13 @@ public class VentaFacade extends AbstractFacade<Venta> {
     public VentaFacade() {
         super(Venta.class);
     }
-    
+
+    public List<Venta> buscarActivos() {
+
+        List<Venta> lista = null;
+        Query q = em.createNamedQuery("Venta.findAll");
+        lista = q.getResultList();
+        return lista;
+    }
+
 }

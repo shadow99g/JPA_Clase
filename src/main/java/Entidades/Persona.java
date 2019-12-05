@@ -7,6 +7,7 @@ package Entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -57,9 +60,8 @@ public class Persona implements Serializable {
     @Size(max = 8)
     @Column(length = 8)
     private String dniper;
-    @Size(max = 10)
-    @Column(length = 10)
-    private String fecnacper;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecnacper;
     @Size(max = 50)
     @Column(length = 50)
     private String dirper;
@@ -70,7 +72,7 @@ public class Persona implements Serializable {
     @Size(max = 20)
     @Column(length = 20)
     private String passwd;
-
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 
@@ -114,14 +116,6 @@ public class Persona implements Serializable {
 
     public void setDniper(String dniper) {
         this.dniper = dniper;
-    }
-
-    public String getFecnacper() {
-        return fecnacper;
-    }
-
-    public void setFecnacper(String fecnacper) {
-        this.fecnacper = fecnacper;
     }
 
     public String getDirper() {
@@ -188,6 +182,14 @@ public class Persona implements Serializable {
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
+    }
+
+    public Date getFecnacper() {
+        return fecnacper;
+    }
+
+    public void setFecnacper(Date fecnacper) {
+        this.fecnacper = fecnacper;
     }
 
 }

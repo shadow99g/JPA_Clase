@@ -5,6 +5,7 @@ import Controller.util.JsfUtil;
 import Controller.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -21,50 +23,59 @@ import javax.faces.convert.FacesConverter;
 @Named("ventaController")
 @SessionScoped
 public class VentaController implements Serializable {
-
+    
     @EJB
     private Controller.VentaFacade ejbFacade;
     private List<Venta> items = null;
     private Venta selected;
-
+    
     public VentaController() {
     }
-
+    
     public Venta getSelected() {
+        
         return selected;
     }
-
+    
     public void setSelected(Venta selected) {
         this.selected = selected;
     }
-
+    
     protected void setEmbeddableKeys() {
     }
-
+    
     protected void initializeEmbeddableKey() {
     }
-
+    
     private VentaFacade getFacade() {
         return ejbFacade;
     }
-
+    
     public Venta prepareCreate() {
         selected = new Venta();
         initializeEmbeddableKey();
         return selected;
     }
-
+    
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VentaCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+        if (selected.getFecven().before(new Date())) {
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VentaCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage("Error al Ingresar Fecha");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, message);
         }
+        
     }
-
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("VentaUpdated"));
     }
-
+    
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("VentaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -72,14 +83,16 @@ public class VentaController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public List<Venta> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+//        if (items == null) {
+
+//            items = getFacade().findAll();
+        items = getFacade().buscarActivos();
+//        }
         return items;
     }
-
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -107,22 +120,22 @@ public class VentaController implements Serializable {
             }
         }
     }
-
+    
     public Venta getVenta(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
-
+    
     public List<Venta> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
-
+    
     public List<Venta> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-
+    
     @FacesConverter(forClass = Venta.class)
     public static class VentaControllerConverter implements Converter {
-
+        
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -132,19 +145,19 @@ public class VentaController implements Serializable {
                     getValue(facesContext.getELContext(), null, "ventaController");
             return controller.getVenta(getKey(value));
         }
-
+        
         java.math.BigDecimal getKey(String value) {
             java.math.BigDecimal key;
             key = new java.math.BigDecimal(value);
             return key;
         }
-
+        
         String getStringKey(java.math.BigDecimal value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-
+        
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -158,7 +171,7 @@ public class VentaController implements Serializable {
                 return null;
             }
         }
-
+        
     }
-
+    
 }

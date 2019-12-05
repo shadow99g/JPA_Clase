@@ -5,6 +5,7 @@ import Controller.util.JsfUtil;
 import Controller.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -26,6 +28,7 @@ public class PersonaController implements Serializable {
     private Controller.PersonaFacade ejbFacade;
     private List<Persona> items = null;
     private Persona selected;
+    Date date;
 
     public PersonaController() {
     }
@@ -55,10 +58,22 @@ public class PersonaController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PersonaCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+        selected.setPasswd("12345");
+        selected.setEstper('A');
+        if (selected.getFecnacper().before(new java.util.Date())) {
+            System.out.println("menor");
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PersonaCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage("Error al Ingresar Fecha");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, message);
         }
+
+//         
     }
 
     public void update() {

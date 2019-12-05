@@ -32,7 +32,7 @@
                                            itemValue="#{codvenItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{detalleVentaController.create}" value="#{bundle.Save}" update="display,:DetalleVentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'DetalleVentaCreateDialog');"/>
+                    <p:commandButton actionListener="#{detalleVentaController.create}" value="#{bundle.Save}" update="display,:DetalleVentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'DetalleVentaCreateDialog');" onclick="DetalleVentaCreateDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DetalleVentaCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

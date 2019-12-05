@@ -8,6 +8,7 @@ package Entidades;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,6 +21,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,24 +43,34 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Venta.findByTotven", query = "SELECT v FROM Venta v WHERE v.totven = :totven")})
 public class Venta implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false, precision = 38, scale = 0)
     private BigDecimal codven;
-    @Size(max = 10)
-    @Column(length = 10)
-    private String fecven;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecven;
     private BigInteger totven;
+
+    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @JoinColumn(name = "CODPER", referencedColumnName = "CODPER", nullable = false)
     @ManyToOne(optional = false)
     private Persona codper;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codven")
     private List<DetalleVenta> detalleVentaList;
 
+    @Transient
+    private int nroventa;
+
     public Venta() {
+    }
+
+    public int getNroventa() {
+        nroventa = detalleVentaList.size();
+        return nroventa;
     }
 
     public Venta(BigDecimal codven) {
@@ -71,11 +85,11 @@ public class Venta implements Serializable {
         this.codven = codven;
     }
 
-    public String getFecven() {
+    public Date getFecven() {
         return fecven;
     }
 
-    public void setFecven(String fecven) {
+    public void setFecven(Date fecven) {
         this.fecven = fecven;
     }
 
@@ -128,5 +142,5 @@ public class Venta implements Serializable {
     public String toString() {
         return "com.mycompany.clase.Venta[ codven=" + codven + " ]";
     }
-    
+
 }

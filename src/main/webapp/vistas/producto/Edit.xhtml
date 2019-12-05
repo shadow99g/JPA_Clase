@@ -12,16 +12,18 @@
             <h:form id="ProductoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{productoController.selected != null}">
-                        <p:outputLabel value="ID" for="codpro" />
-                        <p:inputText id="codpro" value="#{productoController.selected.codpro}" title="#{bundle.EditProductoTitle_codpro}" required="true" requiredMessage="#{bundle.EditProductoRequiredMessage_codpro}"/>
+
                         <p:outputLabel value="Nombre" for="despro" />
                         <p:inputText id="despro" value="#{productoController.selected.despro}" title="#{bundle.EditProductoTitle_despro}" />
                         <p:outputLabel value="Precio" for="cospro" />
                         <p:inputText id="cospro" value="#{productoController.selected.cospro}" title="#{bundle.EditProductoTitle_cospro}" />
                         <p:outputLabel value="Cantidad" for="stopro" />
                         <p:inputText id="stopro" value="#{productoController.selected.stopro}" title="#{bundle.EditProductoTitle_stopro}" />
-                        
+
                     </p:panelGrid>
+                    <p:keyFilter for="despro" regEx="/[a-z_ñ]/i" />
+                    <p:keyFilter for="cospro" mask="num" />
+                    <p:keyFilter for="stopro" mask="num" />
                     <p:commandButton actionListener="#{productoController.update}" value="#{bundle.Save}" update="display,:ProductoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductoEditDialog');" onclick="ProductoCreateDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ProductoEditDialog.hide()"/>
                 </h:panelGroup>

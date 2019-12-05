@@ -14,8 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
 
                         <p:outputLabel value="Fecha" for="fecven" />
-                        <p:inputMask id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.EditVentaTitle_fecven}" mask="99/99/9999"/>
 
+                        <p:datePicker id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.EditVentaTitle_fecven}" />
                         <p:outputLabel value="Total de Ventas" for="totven" />
                         <p:inputText id="totven" value="#{ventaController.selected.totven}" title="#{bundle.EditVentaTitle_totven}" />
                         <p:outputLabel value="Persona" for="codper" />
@@ -27,8 +27,9 @@
                                            itemValue="#{codperItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
+                    <p:keyFilter for="totven" mask="num" />
                     <p:commandButton actionListener="#{ventaController.update}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VentaEditDialog');" onclick="VentaEditDialog.hide()"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="VentaEditDialog.hide()"/>
+                    <p:commandButton value="Cancel" onclick="VentaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

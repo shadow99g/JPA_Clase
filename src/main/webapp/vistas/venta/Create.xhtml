@@ -8,13 +8,13 @@
 
     <ui:composition>
 
-        <p:dialog id="VentaCreateDlg" widgetVar="VentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVentaTitle}">
+        <p:dialog id="VentaCreateDlg" widgetVar="VentaCreateDialog" modal="true" resizable="true" appendTo="@(body)" header="#{bundle.CreateVentaTitle}" width="550" height="300">
             <h:form id="VentaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
 
-                        <p:outputLabel value="Fecha de Venta" for="fecven" />
-                        <p:inputMask id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.CreateVentaTitle_fecven}" mask="99/99/9999"/>
+                        <p:outputLabel value="Fecha de Venta" for="fecven"/>
+                        <p:datePicker id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.CreateVentaTitle_fecven}" />
                         <p:outputLabel value="Total de Ventas" for="totven" />
                         <p:inputText id="totven" value="#{ventaController.selected.totven}" title="#{bundle.CreateVentaTitle_totven}" maxlength="5"/>
                         <p:outputLabel value="Persona" for="codper" />

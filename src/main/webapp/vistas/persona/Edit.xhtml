@@ -18,15 +18,20 @@
                         <p:outputLabel value="Apellidos" for="apeper" />
                         <p:inputText id="apeper" value="#{personaController.selected.apeper}" title="#{bundle.EditPersonaTitle_apeper}" />
                         <p:outputLabel value="DNI" for="dniper" />
-                        <p:inputText id="dniper" value="#{personaController.selected.dniper}" title="#{bundle.EditPersonaTitle_dniper}" />
+                        <p:inputText id="dniper" value="#{personaController.selected.dniper}" title="#{bundle.EditPersonaTitle_dniper}" maxlength="8"/>
                         <p:outputLabel value="Fecha de Nacimiento" for="fecnacper" />
-                        <p:inputMask id="fecnacper" value="#{personaController.selected.fecnacper}" title="#{bundle.CreatePersonaTitle_fecnacper}" mask="99/99/9999"/>
+
+                        <p:datePicker id="fecnacper" value="#{personaController.selected.fecnacper}" title="#{bundle.CreatePersonaTitle_fecnacper}" />
                         <p:outputLabel value="Dirección" for="dirper" />
                         <p:inputText id="dirper" value="#{personaController.selected.dirper}" title="#{bundle.EditPersonaTitle_dirper}" />
                         <p:outputLabel value="Teléfono" for="telper" />
-                        <p:inputText id="telper" value="#{personaController.selected.telper}" title="#{bundle.EditPersonaTitle_telper}" />
+                        <p:inputText id="telper" value="#{personaController.selected.telper}" title="#{bundle.EditPersonaTitle_telper}" maxlength="9"/>
 
                     </p:panelGrid>
+                    <p:keyFilter for="nomper" regEx="/[a-z_ñ]/i" />
+                    <p:keyFilter for="apeper" regEx="/[a-z_ñ]/i" />
+                    <p:keyFilter for="dniper" mask="num" />
+                    <p:keyFilter for="telper" mask="num" />
                     <p:commandButton actionListener="#{personaController.update}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');" onclick="PersonaEditDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PersonaEditDialog.hide()"/>
                 </h:panelGroup>
