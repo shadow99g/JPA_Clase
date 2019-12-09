@@ -7,17 +7,44 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
+        <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDayOfWeek: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+        </script>
 
-        <p:dialog id="VentaEditDlg" widgetVar="VentaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVentaTitle}">
+        <p:dialog id="VentaEditDlg" widgetVar="VentaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVentaTitle}" width="550" height="300">
             <h:form id="VentaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
 
                         <p:outputLabel value="Fecha" for="fecven" />
 
-                        <p:datePicker id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.EditVentaTitle_fecven}" />
-                        <p:outputLabel value="Total de Ventas" for="totven" />
-                        <p:inputText id="totven" value="#{ventaController.selected.totven}" title="#{bundle.EditVentaTitle_totven}" />
+                        <p:calendar id="fecven" value="#{ventaController.selected.fecven}" showOn="button" locale="es" maxdate="today"/>
+
                         <p:outputLabel value="Persona" for="codper" />
                         <p:selectOneMenu id="codper" value="#{ventaController.selected.codper}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_codper}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -27,7 +54,7 @@
                                            itemValue="#{codperItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:keyFilter for="totven" mask="num" />
+
                     <p:commandButton actionListener="#{ventaController.update}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VentaEditDialog');" onclick="VentaEditDialog.hide()"/>
                     <p:commandButton value="Cancel" onclick="VentaEditDialog.hide()"/>
                 </h:panelGroup>

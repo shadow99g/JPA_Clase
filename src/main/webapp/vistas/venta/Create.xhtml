@@ -7,6 +7,34 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
+        <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDayOfWeek: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+        </script>
 
         <p:dialog id="VentaCreateDlg" widgetVar="VentaCreateDialog" modal="true" resizable="true" appendTo="@(body)" header="#{bundle.CreateVentaTitle}" width="550" height="300">
             <h:form id="VentaCreateForm">
@@ -14,9 +42,8 @@
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
 
                         <p:outputLabel value="Fecha de Venta" for="fecven"/>
-                        <p:datePicker id="fecven" value="#{ventaController.selected.fecven}" title="#{bundle.CreateVentaTitle_fecven}" />
-                        <p:outputLabel value="Total de Ventas" for="totven" />
-                        <p:inputText id="totven" value="#{ventaController.selected.totven}" title="#{bundle.CreateVentaTitle_totven}" maxlength="5"/>
+                        <p:calendar id="fecven" value="#{ventaController.selected.fecven}" showOn="button" locale="es" maxdate="today"/>
+                        
                         <p:outputLabel value="Persona" for="codper" />
                         <p:selectOneMenu id="codper" value="#{ventaController.selected.codper}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_codper}">
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
@@ -25,7 +52,7 @@
                                            itemValue="#{codperItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:keyFilter for="totven" mask="num" />
+
                     <p:commandButton actionListener="#{ventaController.create}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');" onclick="VentaEditDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VentaCreateDialog.hide()"/>
                 </h:panelGroup>

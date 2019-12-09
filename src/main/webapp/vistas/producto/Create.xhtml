@@ -12,7 +12,7 @@
             <h:form id="ProductoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{productoController.selected != null}">
-                        
+
                         <p:outputLabel value="Nombre" for="despro" />
                         <p:inputText id="despro" value="#{productoController.selected.despro}" title="#{bundle.CreateProductoTitle_despro}" />
                         <p:outputLabel value="Precio" for="cospro" />
@@ -20,9 +20,9 @@
                         <p:outputLabel value="Cantidad" for="stopro" />
                         <p:inputText id="stopro" value="#{productoController.selected.stopro}" title="#{bundle.CreateProductoTitle_stopro}" />
                     </p:panelGrid>
-                    <p:keyFilter for="despro" regEx="/[a-z_ñ]/i" />
-                    <p:keyFilter for="cospro" mask="num" />
-                    <p:keyFilter for="stopro" mask="num" />
+                    <p:keyFilter for="despro" regEx="/[a-z_ñ]/i"/>
+                    <p:keyFilter for="cospro" mask="num"/>
+                    <p:keyFilter for="stopro" mask="num"/>
                     <p:commandButton actionListener="#{productoController.create}" value="#{bundle.Save}" update="display,:ProductoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductoCreateDialog');" onclick="ProductoCreateDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ProductoCreateDialog.hide()"/>
                 </h:panelGroup>

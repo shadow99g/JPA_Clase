@@ -12,7 +12,7 @@
             <h:form id="DetalleVentaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{detalleVentaController.selected != null}">
-                        
+
                         <p:outputLabel value="#{bundle.CreateDetalleVentaLabel_canven}" for="canven" />
                         <p:inputText id="canven" value="#{detalleVentaController.selected.canven}" title="#{bundle.CreateDetalleVentaTitle_canven}" />
                         <p:outputLabel value="#{bundle.CreateDetalleVentaLabel_sbtven}" for="sbtven" />
@@ -32,6 +32,8 @@
                                            itemValue="#{codvenItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
+                    <p:keyFilter for="canven" regEx="num"/>
+                    <p:keyFilter for="sbtven" mask="num"/>
                     <p:commandButton actionListener="#{detalleVentaController.create}" value="#{bundle.Save}" update="display,:DetalleVentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'DetalleVentaCreateDialog');" onclick="DetalleVentaCreateDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DetalleVentaCreateDialog.hide()"/>
                 </h:panelGroup>
